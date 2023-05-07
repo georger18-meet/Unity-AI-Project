@@ -77,8 +77,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fdc5bbed243c4448bb2d52f1b625040, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Direction: {x: 0, y: 0, z: 0}
-  Speed: 0
+  Direction: {x: 0, y: 0, z: 1}
+  Speed: 1
+  AngularSpeed: 5
   UseGravity: 0
   GravityAcceleration: -10
   GroundCheckOffset: {x: 0, y: 0, z: 0}
@@ -86,6 +87,9 @@ MonoBehaviour:
   GroundLayer:
     serializedVersion: 2
     m_Bits: 8
+  UseNav: 1
+  Destination: {x: 0, y: 0, z: 0}
+  StoppingDistance: 0.1
 --- !u!1 &5066350201118040079
 GameObject:
   m_ObjectHideFlags: 0
