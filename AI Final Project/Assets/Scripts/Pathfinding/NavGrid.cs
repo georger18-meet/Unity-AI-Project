@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Grid : MonoBehaviour
+public class NavGrid : MonoBehaviour
 {
     public LayerMask Unwalkable;
     public Vector2 GridWorldSize;
@@ -20,7 +20,7 @@ public class Grid : MonoBehaviour
     }
 
 
-    [ContextMenu("Bake Grid")]
+    [ContextMenu("Bake NavGrid")]
     public void BakeGrid()
     {
         // Setting Grid Size from Parameters & Creating it.
@@ -44,10 +44,34 @@ public class Grid : MonoBehaviour
                 bool walkable = !(Physics.CheckSphere(worldPoint, NodeRadius, Unwalkable));
 
                 // Populating the Grid Nodes
-                _grid[x, y] = new Node(walkable, worldPoint);
-
+                _grid[x, y] = new Node(walkable, worldPoint, x, y);
             }
         }
+    }
+
+    public List<Node> GetNeighbours(Node node)
+    {
+        List<Node> neighboures = new List<Node>();
+
+        for (int x = -1; x <= 1; x++)
+        {
+            for (int y = -1; y <= 1; y++)
+            {
+                // If Found Node Is Passed Node, Skip
+                if (x == 0 && y == 0) { continue; }
+
+                int checkX = node.GridX + x;
+                int checkY = node.GridY + y;
+
+                // Confirm Node Exist On Grid
+                if (checkX >= 0 && checkX < _gridSizeX && checkY >= 0 && checkY < _gridSizeY)
+                {
+                    neighboures.Add(_grid[checkX, checkY]);
+                }
+            }
+        }
+
+        return neighboures;
     }
 
     public Node NodeFromWorldPoint(Vector3 worldPos)
@@ -57,12 +81,13 @@ public class Grid : MonoBehaviour
         percentageX = Mathf.Clamp01(percentageX);
         percentageY = Mathf.Clamp01(percentageY);
 
-        int x = Mathf.RoundToInt((_gridSizeX-1) * percentageX);
-        int y = Mathf.RoundToInt((_gridSizeY-1) * percentageY);
+        int x = Mathf.RoundToInt((_gridSizeX - 1) * percentageX);
+        int y = Mathf.RoundToInt((_gridSizeY - 1) * percentageY);
         return _grid[x, y];
     }
 
 
+    public List<Node> path;
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireCube(transform.position, new Vector3(GridWorldSize.x, 1, GridWorldSize.y));
@@ -74,6 +99,13 @@ public class Grid : MonoBehaviour
                 Color cWalkable = new Color(1, 1, 1, 0.5f);
                 Color cUnwalkable = new Color(1, 0, 0, 0.5f);
                 Gizmos.color = (node.Walkable) ? cWalkable : cUnwalkable;
+                if (path != null)
+                {
+                    if (path.Contains(node))
+                    {
+                        Gizmos.color = Color.cyan;
+                    }
+                }
                 Gizmos.DrawCube(node.WorldPosition, Vector3.one * (_nodeDiameter - 0.1f));
             }
         }
