@@ -56,17 +56,20 @@ public class DummyTestAI : MonoBehaviour
     {
         if (_canMove)
         {
-            if (transform.position.y > Destination.y + StoppingDistance)
+            if (UseNav)
             {
-                Direction.y = -1;
-            }
-            else if (transform.position.y < Destination.y - StoppingDistance)
-            {
-                Direction.y = 1;
-            }
-            else
-            {
-                Direction.y = 0;
+                if (transform.position.y > Destination.y + StoppingDistance)
+                {
+                    Direction.y = -1;
+                }
+                else if (transform.position.y < Destination.y - StoppingDistance)
+                {
+                    Direction.y = 1;
+                }
+                else
+                {
+                    Direction.y = 0;
+                }
             }
 
             Vector3 moveDir = ((transform.right * Direction.x) + (transform.up * Direction.y) + (transform.forward * Direction.z)).normalized;
