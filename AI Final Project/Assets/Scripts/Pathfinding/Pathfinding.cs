@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using System.Diagnostics;
 
 public class Pathfinding : MonoBehaviour
 {
@@ -23,10 +24,14 @@ public class Pathfinding : MonoBehaviour
 
     private void FindPath(Vector3 startPos, Vector3 targetPos)
     {
+        //Stopwatch sw = new Stopwatch(); // For Diagnostics
+        //sw.Start(); // For Diagnostics
+
         Node startNode = _grid.NodeFromWorldPoint(startPos);
         Node targetNode = _grid.NodeFromWorldPoint(targetPos);
 
-        List<Node> openSet = new List<Node>();
+        //List<Node> openSet = new List<Node>();
+        Heap<Node> openSet = new Heap<Node>(_grid.MaxSize);
         HashSet<Node> closedSet = new HashSet<Node>();
 
         openSet.Add(startNode); // Adding StartNode to OpenSet
@@ -34,23 +39,27 @@ public class Pathfinding : MonoBehaviour
         // Main Loop
         while (openSet.Count > 0)
         {
-            Node currentNode = openSet[0];
-            for (int i = 1; i < openSet.Count; i++)
-            {
-                if (openSet[i].FCost < currentNode.FCost || (openSet[i].FCost == currentNode.FCost && openSet[i].HCost < currentNode.HCost))
-                {
-                    currentNode = openSet[i];
-                }
-            }
+            Node currentNode = openSet.RemoveFirst();
+            //Node currentNode = openSet[0];
+            //for (int i = 1; i < openSet.Count; i++)
+            //{
+            //    if (openSet[i].FCost < currentNode.FCost || (openSet[i].FCost == currentNode.FCost && openSet[i].HCost < currentNode.HCost))
+            //    {
+            //        currentNode = openSet[i];
+            //    }
+            //}
 
-            openSet.Remove(currentNode);
+            //openSet.Remove(currentNode);
             closedSet.Add(currentNode);
 
             // If Found Target Node then Exit Loop
-            if (currentNode == targetNode) 
+            if (currentNode == targetNode)
             {
+                //sw.Stop(); // For Diagnostics
+                //print("Path Found: " + sw.ElapsedMilliseconds + " ms"); // For Diagnostics
+
                 RetracePath(startNode, targetNode);
-                return; 
+                return;
             }
 
             // Checking Neighbours

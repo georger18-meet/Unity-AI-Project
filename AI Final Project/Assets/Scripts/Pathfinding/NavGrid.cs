@@ -13,6 +13,7 @@ public class NavGrid : MonoBehaviour
     private int _gridSizeX, _gridSizeY;
 
     public bool ShowGrid = true;
+    public int MaxSize { get { return _gridSizeX * _gridSizeY; } }
 
     private void Start()
     {
