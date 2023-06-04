@@ -88,7 +88,6 @@ public class NavGrid : MonoBehaviour
     }
 
 
-    public List<Node> path;
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireCube(transform.position, new Vector3(GridWorldSize.x, 1, GridWorldSize.y));
@@ -100,15 +99,17 @@ public class NavGrid : MonoBehaviour
                 Color cWalkable = new Color(1, 1, 1, 0.5f);
                 Color cUnwalkable = new Color(1, 0, 0, 0.5f);
                 Gizmos.color = (node.Walkable) ? cWalkable : cUnwalkable;
-                if (path != null)
-                {
-                    if (path.Contains(node))
-                    {
-                        Gizmos.color = Color.cyan;
-                    }
-                }
                 Gizmos.DrawCube(node.WorldPosition, Vector3.one * (_nodeDiameter - 0.1f));
             }
         }
+
+        //if (path != null && ShowPath && !ShowGrid)
+        //{
+        //    foreach (Node node in path)
+        //    {
+        //        Gizmos.color = Color.cyan;
+        //        Gizmos.DrawCube(node.WorldPosition, Vector3.one * (_nodeDiameter - 0.1f));
+        //    }
+        //}
     }
 }
