@@ -61,6 +61,7 @@ public class DummyTestAI : MonoBehaviour
     IEnumerator FollowPath()
     {
         Vector3 currentWaypoint = _path[0];
+        _targetIndex = 0;
 
         while (true)
         {
