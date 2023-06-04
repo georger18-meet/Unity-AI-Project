@@ -90,6 +90,8 @@ MonoBehaviour:
   UseNav: 1
   Destination: {x: 0, y: 0, z: 0}
   StoppingDistance: 0.1
+  ShowGrounded: 1
+  ShowPath: 1
 --- !u!1 &5066350201118040079
 GameObject:
   m_ObjectHideFlags: 0

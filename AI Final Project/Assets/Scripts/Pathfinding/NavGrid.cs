@@ -15,7 +15,7 @@ public class NavGrid : MonoBehaviour
     public bool ShowGrid = true;
     public int MaxSize { get { return _gridSizeX * _gridSizeY; } }
 
-    private void Start()
+    private void Awake()
     {
         BakeGrid();
     }
@@ -102,14 +102,5 @@ public class NavGrid : MonoBehaviour
                 Gizmos.DrawCube(node.WorldPosition, Vector3.one * (_nodeDiameter - 0.1f));
             }
         }
-
-        //if (path != null && ShowPath && !ShowGrid)
-        //{
-        //    foreach (Node node in path)
-        //    {
-        //        Gizmos.color = Color.cyan;
-        //        Gizmos.DrawCube(node.WorldPosition, Vector3.one * (_nodeDiameter - 0.1f));
-        //    }
-        //}
     }
 }
