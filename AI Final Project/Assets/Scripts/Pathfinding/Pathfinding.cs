@@ -58,7 +58,7 @@ public class Pathfinding : MonoBehaviour
                     }
 
                     // Compare Weight Costs
-                    int moveCostToNeighbour = currentNode.GCost + GetDistance(currentNode, neighbour);
+                    int moveCostToNeighbour = currentNode.GCost + GetDistance(currentNode, neighbour) + neighbour.MovementPenalty;
                     if (moveCostToNeighbour < neighbour.GCost || !openSet.Contains(neighbour))
                     {
                         neighbour.GCost = moveCostToNeighbour;

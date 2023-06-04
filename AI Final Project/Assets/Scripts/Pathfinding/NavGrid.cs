@@ -4,9 +4,13 @@ using UnityEngine;
 
 public class NavGrid : MonoBehaviour
 {
-    public LayerMask Unwalkable;
     public Vector2 GridWorldSize;
     public float NodeRadius;
+    public LayerMask Unwalkable;
+    public TerrainType[] WalkbleRegions;
+    LayerMask _walkableMask;
+    Dictionary<int, int> _walkableRegionsDictionary = new Dictionary<int, int>();
+    
     private Node[,] _grid;
 
     private float _nodeDiameter;
@@ -28,6 +32,13 @@ public class NavGrid : MonoBehaviour
         _nodeDiameter = NodeRadius * 2;
         _gridSizeX = Mathf.RoundToInt(GridWorldSize.x / _nodeDiameter);
         _gridSizeY = Mathf.RoundToInt(GridWorldSize.y / _nodeDiameter);
+
+        foreach (TerrainType region in WalkbleRegions)
+        {
+            _walkableMask.value |= region.TerrainMask.value;
+            _walkableRegionsDictionary.Add((int)Mathf.Log(region.TerrainMask.value, 2), region.TerrainPenalty);
+        }
+
         CreateGrid();
     }
 
@@ -44,8 +55,19 @@ public class NavGrid : MonoBehaviour
                 Vector3 worldPoint = worldBottomLeft + Vector3.right * (x * _nodeDiameter + NodeRadius) + Vector3.forward * (y * _nodeDiameter + NodeRadius);
                 bool walkable = !(Physics.CheckSphere(worldPoint, NodeRadius, Unwalkable));
 
+                int movementPenalty = 0;
+                if (walkable)
+                {
+                    Ray ray = new Ray(worldPoint + Vector3.up * 50, Vector3.down);
+                    RaycastHit hit;
+                    if (Physics.Raycast(ray,out hit, 100, _walkableMask))
+                    {
+                        _walkableRegionsDictionary.TryGetValue(hit.collider.gameObject.layer, out movementPenalty);
+                    }
+                }
+
                 // Populating the Grid Nodes
-                _grid[x, y] = new Node(walkable, worldPoint, x, y);
+                _grid[x, y] = new Node(walkable, worldPoint, x, y, movementPenalty);
             }
         }
     }
@@ -102,5 +124,13 @@ public class NavGrid : MonoBehaviour
                 Gizmos.DrawCube(node.WorldPosition, Vector3.one * (_nodeDiameter - 0.1f));
             }
         }
+    }
+
+
+    [System.Serializable]
+    public class TerrainType
+    {
+        public LayerMask TerrainMask;
+        public int TerrainPenalty;
     }
 }
