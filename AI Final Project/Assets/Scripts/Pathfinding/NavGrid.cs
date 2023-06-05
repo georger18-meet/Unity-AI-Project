@@ -10,14 +10,20 @@ public class NavGrid : MonoBehaviour
     public TerrainType[] WalkbleRegions;
     LayerMask _walkableMask;
     Dictionary<int, int> _walkableRegionsDictionary = new Dictionary<int, int>();
-    
+
     private Node[,] _grid;
 
     private float _nodeDiameter;
     private int _gridSizeX, _gridSizeY;
 
+    private int _penaltyMin;
+    private int _penaltyMax;
+
     public bool ShowGrid = true;
+    public bool ShowPenalty = true;
+
     public int MaxSize { get { return _gridSizeX * _gridSizeY; } }
+
 
     private void Awake()
     {
@@ -33,11 +39,26 @@ public class NavGrid : MonoBehaviour
         _gridSizeX = Mathf.RoundToInt(GridWorldSize.x / _nodeDiameter);
         _gridSizeY = Mathf.RoundToInt(GridWorldSize.y / _nodeDiameter);
 
+
+        int lowPen = 0;
+        int highPen = 0;
         foreach (TerrainType region in WalkbleRegions)
         {
             _walkableMask.value |= region.TerrainMask.value;
             _walkableRegionsDictionary.Add((int)Mathf.Log(region.TerrainMask.value, 2), region.TerrainPenalty);
+
+            // Setting MinMaxPenalty
+            if (region.TerrainPenalty < lowPen)
+            {
+                lowPen = region.TerrainPenalty;
+            }
+            if (region.TerrainPenalty > highPen)
+            {
+                highPen = region.TerrainPenalty;
+            }
         }
+        _penaltyMin = lowPen;
+        _penaltyMax = highPen;
 
         CreateGrid();
     }
@@ -60,7 +81,7 @@ public class NavGrid : MonoBehaviour
                 {
                     Ray ray = new Ray(worldPoint + Vector3.up * 50, Vector3.down);
                     RaycastHit hit;
-                    if (Physics.Raycast(ray,out hit, 100, _walkableMask))
+                    if (Physics.Raycast(ray, out hit, 100, _walkableMask))
                     {
                         _walkableRegionsDictionary.TryGetValue(hit.collider.gameObject.layer, out movementPenalty);
                     }
@@ -118,9 +139,19 @@ public class NavGrid : MonoBehaviour
         {
             foreach (Node node in _grid)
             {
-                Color cWalkable = new Color(1, 1, 1, 0.5f);
-                Color cUnwalkable = new Color(1, 0, 0, 0.5f);
-                Gizmos.color = (node.Walkable) ? cWalkable : cUnwalkable;
+
+                Color cWalkable = new Color(1, 1, 1, 0.75f);
+                Color cPenalty = new Color(0, 0, 0, 0.75f);
+                Color cUnwalkable = new Color(1, 0, 0, 0.75f);
+                if (!ShowPenalty)
+                {
+                    Gizmos.color = (node.Walkable) ? cWalkable : cUnwalkable;
+                }
+                else
+                {
+                    Gizmos.color = Color.Lerp(cWalkable, cPenalty, Mathf.InverseLerp(_penaltyMin, _penaltyMax, node.MovementPenalty));
+                    Gizmos.color = (node.Walkable) ? Gizmos.color : cUnwalkable;
+                }
                 Gizmos.DrawCube(node.WorldPosition, Vector3.one * (_nodeDiameter - 0.1f));
             }
         }
