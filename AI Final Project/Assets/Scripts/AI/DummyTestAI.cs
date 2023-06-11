@@ -62,7 +62,7 @@ public class DummyTestAI : MonoBehaviour
     IEnumerator UpdatePath()
     {
         if (Time.timeSinceLevelLoad < 0.5f) yield return new WaitForSeconds(0.5f);
-        PathRequestManager.RequestPath(transform.position, Destination, OnPathFound);
+        PathRequestManager.RequestPath(new PathRequest(transform.position, Destination, OnPathFound));
 
         float sqrMoveThreshold = PathRefreshMoveThreshold * PathRefreshMoveThreshold;
         Vector3 targetPosOld = Destination;
@@ -72,7 +72,7 @@ public class DummyTestAI : MonoBehaviour
             yield return new WaitForSeconds(PathMinRefreshTime);
             if ((Destination - targetPosOld).sqrMagnitude > sqrMoveThreshold)
             {
-                PathRequestManager.RequestPath(transform.position, Destination, OnPathFound);
+                PathRequestManager.RequestPath(new PathRequest(transform.position, Destination, OnPathFound));
                 targetPosOld = Destination;
 
             }

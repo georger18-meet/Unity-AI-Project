@@ -6,27 +6,23 @@ using System;
 
 public class Pathfinding : MonoBehaviour
 {
-    //public Transform seeker, target;
-
-    private PathRequestManager _pathRequestManager;
     private NavGrid _grid;
     private int _diagonalWeight = 14;
     private int _horVerWeight = 10;
 
     private void Awake()
     {
-        _pathRequestManager = GetComponent<PathRequestManager>();
         _grid = GetComponent<NavGrid>();
     }
 
 
-    IEnumerator FindPath(Vector3 startPos, Vector3 targetPos)
+    public void FindPath(PathRequest request, Action<PathResult> callback)
     {
         Vector3[] waypoints = new Vector3[0];
         bool pathSuccess = false;
 
-        Node startNode = _grid.NodeFromWorldPoint(startPos);
-        Node targetNode = _grid.NodeFromWorldPoint(targetPos);
+        Node startNode = _grid.NodeFromWorldPoint(request.PathStart);
+        Node targetNode = _grid.NodeFromWorldPoint(request.PathEnd);
 
         if (startNode.Walkable && targetNode.Walkable)
         {
@@ -78,13 +74,13 @@ public class Pathfinding : MonoBehaviour
             }
         }
 
-        yield return null;
 
         if (pathSuccess)
         {
             waypoints = RetracePath(startNode, targetNode);
+            pathSuccess = waypoints.Length > 0;
         }
-        _pathRequestManager.FinishedProcessingPath(waypoints, pathSuccess);
+        callback(new PathResult(waypoints, pathSuccess, request.Callback));
     }
 
     private Vector3[] RetracePath(Node startNode, Node endNode)
@@ -130,10 +126,5 @@ public class Pathfinding : MonoBehaviour
             return _diagonalWeight * distY + _horVerWeight * (distX - distY);
         }
         return _diagonalWeight * distX + _horVerWeight * (distY - distX);
-    }
-
-    public void StartFindPath(Vector3 startPos, Vector3 targetPos)
-    {
-        StartCoroutine(FindPath(startPos, targetPos));
     }
 }
