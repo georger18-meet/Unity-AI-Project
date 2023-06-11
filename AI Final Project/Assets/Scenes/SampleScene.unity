@@ -1406,6 +1406,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5662321767494245432, guid: 6ebcc5804fa7e5c40abbef73abc4c305,
         type: 3}
+      propertyPath: Target
+      value: 
+      objectReference: {fileID: 1659372317}
+    - target: {fileID: 5662321767494245432, guid: 6ebcc5804fa7e5c40abbef73abc4c305,
+        type: 3}
       propertyPath: Destination.x
       value: 23
       objectReference: {fileID: 0}
@@ -1493,6 +1498,11 @@ PrefabInstance:
       propertyPath: Speed
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 5662321767494245432, guid: 6ebcc5804fa7e5c40abbef73abc4c305,
+        type: 3}
+      propertyPath: Target
+      value: 
+      objectReference: {fileID: 1659372317}
     - target: {fileID: 5662321767494245432, guid: 6ebcc5804fa7e5c40abbef73abc4c305,
         type: 3}
       propertyPath: Destination.x
@@ -1667,6 +1677,11 @@ PrefabInstance:
       propertyPath: Speed
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 5662321767494245432, guid: 6ebcc5804fa7e5c40abbef73abc4c305,
+        type: 3}
+      propertyPath: Target
+      value: 
+      objectReference: {fileID: 1659372317}
     - target: {fileID: 5662321767494245432, guid: 6ebcc5804fa7e5c40abbef73abc4c305,
         type: 3}
       propertyPath: Destination.x
@@ -2229,6 +2244,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5662321767494245432, guid: 6ebcc5804fa7e5c40abbef73abc4c305,
         type: 3}
+      propertyPath: Target
+      value: 
+      objectReference: {fileID: 1659372317}
+    - target: {fileID: 5662321767494245432, guid: 6ebcc5804fa7e5c40abbef73abc4c305,
+        type: 3}
       propertyPath: Destination.x
       value: 23
       objectReference: {fileID: 0}
@@ -2470,6 +2490,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5662321767494245432, guid: 6ebcc5804fa7e5c40abbef73abc4c305,
+        type: 3}
+      propertyPath: Target
+      value: 
+      objectReference: {fileID: 1659372317}
     - target: {fileID: 5662321767494245432, guid: 6ebcc5804fa7e5c40abbef73abc4c305,
         type: 3}
       propertyPath: Destination.x

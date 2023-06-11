@@ -25,6 +25,8 @@ public class DummyTestAI : MonoBehaviour
 
     [Header("Navigation")]
     public bool UseNav = true;
+    public bool UseTarget = true;
+    public Transform Target;
     public Vector3 Destination;
     public float StoppingDistance = 1f;
     public const float PathRefreshMoveThreshold = 0.5f;
@@ -41,7 +43,13 @@ public class DummyTestAI : MonoBehaviour
 
     private void Start()
     {
+        if (UseTarget && Target != null) Destination = Target.position;
         StartCoroutine(UpdatePath());
+    }
+
+    private void Update()
+    {
+        if (UseTarget && Target != null) Destination = Target.position;
     }
 
     public void OnPathFound(Vector3[] waypoints, bool pathSuccessfull)
