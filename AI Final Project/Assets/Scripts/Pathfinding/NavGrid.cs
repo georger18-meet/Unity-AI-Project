@@ -74,7 +74,8 @@ public class NavGrid : MonoBehaviour
             for (int y = 0; y < _gridSizeY; y++)
             {
                 Vector3 worldPoint = worldBottomLeft + Vector3.right * (x * _nodeDiameter + NodeRadius) + Vector3.forward * (y * _nodeDiameter + NodeRadius);
-                bool walkable = !(Physics.CheckSphere(worldPoint, NodeRadius, Unwalkable));
+                bool empty = !Physics.CheckSphere(worldPoint, NodeRadius, Unwalkable) && !Physics.CheckSphere(worldPoint, NodeRadius, _walkableMask);
+                bool walkable = !Physics.CheckSphere(worldPoint, NodeRadius, Unwalkable);
 
                 int movementPenalty = 0;
                 if (walkable)
@@ -88,7 +89,7 @@ public class NavGrid : MonoBehaviour
                 }
 
                 // Populating the Grid Nodes
-                _grid[x, y] = new Node(walkable, worldPoint, x, y, movementPenalty);
+                _grid[x, y] = new Node(empty, walkable, worldPoint, x, y, movementPenalty);
             }
         }
     }
@@ -120,8 +121,8 @@ public class NavGrid : MonoBehaviour
 
     public Node NodeFromWorldPoint(Vector3 worldPos)
     {
-        float percentageX = (worldPos.x + GridWorldSize.x / 2) / GridWorldSize.x;
-        float percentageY = (worldPos.z + GridWorldSize.y / 2) / GridWorldSize.y;
+        float percentageX = (worldPos.x - transform.position.x + GridWorldSize.x / 2) / GridWorldSize.x;
+        float percentageY = (worldPos.z - transform.position.z + GridWorldSize.y / 2) / GridWorldSize.y;
         percentageX = Mathf.Clamp01(percentageX);
         percentageY = Mathf.Clamp01(percentageY);
 
@@ -139,20 +140,22 @@ public class NavGrid : MonoBehaviour
         {
             foreach (Node node in _grid)
             {
-
-                Color cWalkable = new Color(1, 1, 1, 0.75f);
-                Color cPenalty = new Color(0, 0, 0, 0.75f);
-                Color cUnwalkable = new Color(1, 0, 0, 0.75f);
-                if (!ShowPenalty)
+                if (!node.Empty)
                 {
-                    Gizmos.color = (node.Walkable) ? cWalkable : cUnwalkable;
+                    Color cWalkable = new Color(1, 1, 1, 0.75f);
+                    Color cPenalty = new Color(0, 0, 0, 0.75f);
+                    Color cUnwalkable = new Color(1, 0, 0, 0.75f);
+                    if (!ShowPenalty)
+                    {
+                        Gizmos.color = (node.Walkable) ? cWalkable : cUnwalkable;
+                    }
+                    else
+                    {
+                        Gizmos.color = Color.Lerp(cWalkable, cPenalty, Mathf.InverseLerp(_penaltyMin, _penaltyMax, node.MovementPenalty));
+                        Gizmos.color = (node.Walkable) ? Gizmos.color : cUnwalkable;
+                    }
+                    Gizmos.DrawCube(node.WorldPosition, Vector3.one * (_nodeDiameter - 0.1f));
                 }
-                else
-                {
-                    Gizmos.color = Color.Lerp(cWalkable, cPenalty, Mathf.InverseLerp(_penaltyMin, _penaltyMax, node.MovementPenalty));
-                    Gizmos.color = (node.Walkable) ? Gizmos.color : cUnwalkable;
-                }
-                Gizmos.DrawCube(node.WorldPosition, Vector3.one * (_nodeDiameter - 0.1f));
             }
         }
     }
