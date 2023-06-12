@@ -9,6 +9,7 @@ public class Node : IHeapItem<Node>
     public Vector3 WorldPosition;
     public int GridX;
     public int GridY;
+    public int GridZ;
     public int MovementPenalty;
 
     public Node ParentNode;
@@ -19,13 +20,14 @@ public class Node : IHeapItem<Node>
     public int FCost { get { return GCost + HCost; } }
     public int HeapIndex { get => _heapIndex; set => _heapIndex = value; }
 
-    public Node(bool empty, bool walkable, Vector3 worldPosition, int gridX, int gridY, int movementPenalty)
+    public Node(bool empty, bool walkable, Vector3 worldPosition, int gridX, int gridY, int gridZ, int movementPenalty)
     {
         Empty = empty;
         Walkable = walkable;
         WorldPosition = worldPosition;
         GridX = gridX;
         GridY = gridY;
+        GridZ = gridZ;
         MovementPenalty = movementPenalty;
     }
 
