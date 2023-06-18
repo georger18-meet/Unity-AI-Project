@@ -1278,7 +1278,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 990759895}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -13.87, y: 2.5, z: -16.25}
+  m_LocalPosition: {x: -19.119999, y: 0, z: -2.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1570,7 +1570,7 @@ PrefabInstance:
     - target: {fileID: 5066350199884164116, guid: 6ebcc5804fa7e5c40abbef73abc4c305,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5066350199884164117, guid: 6ebcc5804fa7e5c40abbef73abc4c305,
         type: 3}
@@ -1664,7 +1664,7 @@ PrefabInstance:
     - target: {fileID: 5066350199884164116, guid: 6ebcc5804fa7e5c40abbef73abc4c305,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5066350199884164117, guid: 6ebcc5804fa7e5c40abbef73abc4c305,
         type: 3}
@@ -1848,7 +1848,7 @@ PrefabInstance:
     - target: {fileID: 5066350199884164116, guid: 6ebcc5804fa7e5c40abbef73abc4c305,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5066350199884164117, guid: 6ebcc5804fa7e5c40abbef73abc4c305,
         type: 3}
@@ -2504,7 +2504,7 @@ PrefabInstance:
     - target: {fileID: 5066350199884164116, guid: 6ebcc5804fa7e5c40abbef73abc4c305,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5066350199884164117, guid: 6ebcc5804fa7e5c40abbef73abc4c305,
         type: 3}
@@ -2822,13 +2822,13 @@ PrefabInstance:
     - target: {fileID: 5662321767494245432, guid: 6ebcc5804fa7e5c40abbef73abc4c305,
         type: 3}
       propertyPath: CanFly
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5662321767494245432, guid: 6ebcc5804fa7e5c40abbef73abc4c305,
         type: 3}
       propertyPath: Target
       value: 
-      objectReference: {fileID: 1659372317}
+      objectReference: {fileID: 990759896}
     - target: {fileID: 5662321767494245432, guid: 6ebcc5804fa7e5c40abbef73abc4c305,
         type: 3}
       propertyPath: Destination.x

@@ -59,11 +59,11 @@ public class CharacterAI : MonoBehaviour
             _path = new Path(waypoints, transform.position, TurnDist, StoppingDistance);
             StopCoroutine("FollowPath");
             StartCoroutine("FollowPath");
-            Debug.Log(gameObject.name + ": Path Found");
+            //Debug.Log(gameObject.name + ": Path Found");
         }
         else
         {
-            Debug.Log(gameObject.name + ": Invalid Path");
+            //Debug.Log(gameObject.name + ": Invalid Path");
         }
     }
 
