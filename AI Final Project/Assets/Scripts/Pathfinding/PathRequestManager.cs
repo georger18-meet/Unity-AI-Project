@@ -73,12 +73,14 @@ public struct PathRequest
 {
     public Vector3 PathStart;
     public Vector3 PathEnd;
+    public bool CountAir;
     public Action<Vector3[], bool> Callback;
 
-    public PathRequest(Vector3 start, Vector3 end, Action<Vector3[], bool> callback)
+    public PathRequest(Vector3 start, Vector3 end, bool canFly, Action<Vector3[], bool> callback)
     {
         PathStart = start;
         PathEnd = end;
+        CountAir = canFly;
         Callback = callback;
     }
 }

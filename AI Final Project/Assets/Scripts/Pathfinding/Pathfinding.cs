@@ -48,7 +48,7 @@ public class Pathfinding : MonoBehaviour
                 foreach (Node neighbour in _grid.GetNeighbours(currentNode))
                 {
                     // Skip Neighbour Logic
-                    if (!neighbour.Walkable || closedSet.Contains(neighbour))
+                    if ((neighbour.Empty && !request.CountAir) || !neighbour.Walkable || closedSet.Contains(neighbour))
                     {
                         continue;
                     }

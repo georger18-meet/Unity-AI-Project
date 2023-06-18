@@ -25,6 +25,7 @@ public class DummyTestAI : MonoBehaviour
 
     [Header("Navigation")]
     public bool UseNav = true;
+    public bool CanFly = false;
     public bool UseTarget = true;
     public Transform Target;
     public Vector3 Destination;
@@ -70,7 +71,7 @@ public class DummyTestAI : MonoBehaviour
     IEnumerator UpdatePath()
     {
         if (Time.timeSinceLevelLoad < 0.5f) yield return new WaitForSeconds(0.5f);
-        PathRequestManager.RequestPath(new PathRequest(transform.position, Destination, OnPathFound));
+        PathRequestManager.RequestPath(new PathRequest(transform.position, Destination, CanFly, OnPathFound));
 
         float sqrMoveThreshold = PathRefreshMoveThreshold * PathRefreshMoveThreshold;
         Vector3 targetPosOld = Destination;
@@ -80,7 +81,7 @@ public class DummyTestAI : MonoBehaviour
             yield return new WaitForSeconds(PathMinRefreshTime);
             if ((Destination - targetPosOld).sqrMagnitude > sqrMoveThreshold)
             {
-                PathRequestManager.RequestPath(new PathRequest(transform.position, Destination, OnPathFound));
+                PathRequestManager.RequestPath(new PathRequest(transform.position, Destination, CanFly, OnPathFound));
                 targetPosOld = Destination;
 
             }
