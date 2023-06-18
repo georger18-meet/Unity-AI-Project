@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class StateManager : MonoBehaviour
 {
+    public AllStates DisplayState;
     State _currentState;
     public IdleState _idleState = new IdleState();
     public ChaseState _chaseState = new ChaseState();
@@ -21,6 +22,7 @@ public class StateManager : MonoBehaviour
     void Update()
     {
         _currentState.UpdateState(this);
+        DisplayState = _currentState.ThisState;
     }
 
 

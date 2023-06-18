@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using UnityEngine;
 
+[RequireComponent(typeof(StateManager))]
 public class CharacterAI : MonoBehaviour
 {
     [Header("Movement")]
@@ -40,16 +42,31 @@ public class CharacterAI : MonoBehaviour
     public bool ShowGrounded;
     public bool ShowPath;
 
+    [Header("States")]
+    [SerializeField] float _detectionRange = 10;
+    [SerializeField] float _attackingRange = 2;
+    bool _detected;
+    bool _attacking;
+    private StateManager _stateManager;
+
 
     private void Start()
     {
+        _stateManager = GetComponent<StateManager>();
+
         if (UseTarget && Target != null) Destination = Target.position;
         StartCoroutine(UpdatePath());
     }
 
     private void Update()
     {
+        Run();
+    }
+
+    public void Run()
+    {
         if (UseTarget && Target != null) Destination = Target.position;
+        StateHandler();
     }
 
     public void OnPathFound(Vector3[] waypoints, bool pathSuccessfull)
@@ -128,6 +145,55 @@ public class CharacterAI : MonoBehaviour
             }
 
             yield return null;
+        }
+    }
+
+    public virtual void StateHandler()
+    {
+        if (_stateManager && UseTarget && Target)
+        {
+            float dist = Vector3.Distance(transform.position, Target.position);
+
+            if (dist <= _attackingRange)
+            {
+                _attacking = true;
+            }
+            else if (dist <= _detectionRange)
+            {
+                _detected = true;
+                _attacking = false;
+            }
+            else
+            {
+                _detected = false;
+                _attacking = false;
+            }
+
+
+            if (_detected)
+            {
+                if (!_attacking)
+                {
+                    _stateManager._idleState.TargetInRange = true;
+                    _stateManager._chaseState.TargetInRange = true;
+                    _stateManager._chaseState.TargetInAttackRange = false;
+                    _stateManager._attackState.TargetInAttackRange = false;
+                }
+                else
+                {
+                    _stateManager._idleState.TargetInRange = true;
+                    _stateManager._chaseState.TargetInRange = true;
+                    _stateManager._chaseState.TargetInAttackRange = true;
+                    _stateManager._attackState.TargetInAttackRange = true;
+                }
+            }
+            else
+            {
+                _stateManager._idleState.TargetInRange = false;
+                _stateManager._chaseState.TargetInRange = false;
+                _stateManager._chaseState.TargetInAttackRange = false;
+                _stateManager._attackState.TargetInAttackRange = false;
+            }
         }
     }
 

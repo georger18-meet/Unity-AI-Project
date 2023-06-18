@@ -97,6 +97,8 @@ MonoBehaviour:
   StoppingDistance: 1
   ShowGrounded: 1
   ShowPath: 1
+  _detectionRange: 10
+  _attackingRange: 2
 --- !u!114 &159503667816126020
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -109,6 +111,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f18a257268a6f8a40ae3697e450f06ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DisplayState: 0
 --- !u!1 &5066350201118040079
 GameObject:
   m_ObjectHideFlags: 0
