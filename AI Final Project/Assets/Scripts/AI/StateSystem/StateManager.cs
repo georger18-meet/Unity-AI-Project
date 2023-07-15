@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,16 +6,16 @@ using UnityEngine;
 public class StateManager : MonoBehaviour
 {
     public AllStates DisplayState;
+    [SerializeField] private StatesHolder _statesHolder;
     State _currentState;
-    public IdleState _idleState = new IdleState();
-    public ChaseState _chaseState = new ChaseState();
-    public AttackState _attackState = new AttackState();
+
+    public StatesHolder GetStatesHolder { get => _statesHolder; }
 
 
     // Start is called before the first frame update
     void Start()
     {
-        _currentState = _idleState;
+        _currentState = _statesHolder.GetStateInDict(AllStates.Idle);
         _currentState.EnterState(this);
     }
 

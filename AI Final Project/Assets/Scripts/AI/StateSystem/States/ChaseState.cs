@@ -4,10 +4,6 @@ using UnityEngine;
 
 public class ChaseState : State
 {
-    public bool TargetInRange;
-    public bool TargetInAttackRange;
-
-
     public override AllStates ThisState { get => AllStates.Chase; }
 
     public override void EnterState(StateManager manager)
@@ -18,13 +14,13 @@ public class ChaseState : State
     public override void UpdateState(StateManager manager)
     {
         Debug.Log("Updating Chase State");
-        if (!TargetInRange)
+        if (!FirstCondition)
         {
-            manager.SwitchState(manager._idleState);
+            manager.SwitchState(manager.GetStatesHolder.GetStateInDict(PreviousState));
         }
-        if (TargetInAttackRange)
+        if (SecondCondition)
         {
-            manager.SwitchState(manager._attackState);
+            manager.SwitchState(manager.GetStatesHolder.GetStateInDict(NextState));
         }
     }
 }

@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class IdleState : State
 {
-    public bool TargetInRange;
-
-
     public override AllStates ThisState { get => AllStates.Idle; }
 
     public override void EnterState(StateManager manager)
@@ -17,9 +14,9 @@ public class IdleState : State
     public override void UpdateState(StateManager manager)
     {
         Debug.Log("Updating Idle State");
-        if (TargetInRange)
+        if (FirstCondition)
         {
-            manager.SwitchState(manager._chaseState);
+            manager.SwitchState(manager.GetStatesHolder.GetStateInDict(NextState));
         }
     }
 }

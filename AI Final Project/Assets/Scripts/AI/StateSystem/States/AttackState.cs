@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class AttackState : State
 {
-    public bool TargetInAttackRange;
-
-
     public override AllStates ThisState { get => AllStates.Attack; }
 
     public override void EnterState(StateManager manager)
@@ -18,9 +15,9 @@ public class AttackState : State
     public override void UpdateState(StateManager manager)
     {
         Debug.Log("Updating Attack State");
-        if (!TargetInAttackRange)
+        if (!FirstCondition)
         {
-            manager.SwitchState(manager._chaseState);
+            manager.SwitchState(manager.GetStatesHolder.GetStateInDict(PreviousState));
         }
     }
 }

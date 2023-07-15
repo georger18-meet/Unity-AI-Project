@@ -174,25 +174,25 @@ public class CharacterAI : MonoBehaviour
             {
                 if (!_attacking)
                 {
-                    _stateManager._idleState.TargetInRange = true;
-                    _stateManager._chaseState.TargetInRange = true;
-                    _stateManager._chaseState.TargetInAttackRange = false;
-                    _stateManager._attackState.TargetInAttackRange = false;
+                    _stateManager.GetStatesHolder.GetStateInDict(AllStates.Idle).FirstCondition = true;
+                    _stateManager.GetStatesHolder.GetStateInDict(AllStates.Chase).FirstCondition = true;
+                    _stateManager.GetStatesHolder.GetStateInDict(AllStates.Chase).SecondCondition = false;
+                    _stateManager.GetStatesHolder.GetStateInDict(AllStates.Attack).FirstCondition = false;
                 }
                 else
                 {
-                    _stateManager._idleState.TargetInRange = true;
-                    _stateManager._chaseState.TargetInRange = true;
-                    _stateManager._chaseState.TargetInAttackRange = true;
-                    _stateManager._attackState.TargetInAttackRange = true;
+                    _stateManager.GetStatesHolder.GetStateInDict(AllStates.Idle).FirstCondition = true;
+                    _stateManager.GetStatesHolder.GetStateInDict(AllStates.Chase).FirstCondition = true;
+                    _stateManager.GetStatesHolder.GetStateInDict(AllStates.Chase).SecondCondition = true;
+                    _stateManager.GetStatesHolder.GetStateInDict(AllStates.Attack).FirstCondition = true;
                 }
             }
             else
             {
-                _stateManager._idleState.TargetInRange = false;
-                _stateManager._chaseState.TargetInRange = false;
-                _stateManager._chaseState.TargetInAttackRange = false;
-                _stateManager._attackState.TargetInAttackRange = false;
+                _stateManager.GetStatesHolder.GetStateInDict(AllStates.Idle).FirstCondition = false;
+                _stateManager.GetStatesHolder.GetStateInDict(AllStates.Chase).FirstCondition = false;
+                _stateManager.GetStatesHolder.GetStateInDict(AllStates.Chase).SecondCondition = false;
+                _stateManager.GetStatesHolder.GetStateInDict(AllStates.Attack).FirstCondition = false;
             }
         }
     }
