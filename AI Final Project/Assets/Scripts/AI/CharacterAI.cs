@@ -40,11 +40,13 @@ public class CharacterAI : MonoBehaviour
 
     [Header("Gizmos")]
     public bool ShowGrounded;
+    public bool ShowRange;
     public bool ShowPath;
 
     [Header("States")]
-    [SerializeField] float _detectionRange = 10;
-    [SerializeField] float _attackingRange = 2;
+    [SerializeField] private LayerMask _targetLayer;
+    [SerializeField] private float _detectionRange = 10;
+    [SerializeField] private float _attackingRange = 2;
     bool _detected;
     bool _attacking;
     private StateManager _stateManager;
@@ -55,7 +57,14 @@ public class CharacterAI : MonoBehaviour
     {
         _stateManager = GetComponent<StateManager>();
 
-        if (UseTarget && Target != null) Destination = Target.position;
+        if (UseTarget && Target != null)
+        {
+            Destination = Target.position;
+        }
+        else if (UseTarget && Target == null)
+        {
+            Destination = transform.position;
+        }
         StartCoroutine(UpdatePath());
     }
 
@@ -70,13 +79,16 @@ public class CharacterAI : MonoBehaviour
         StateHandler();
     }
 
+
+    #region PathFinding
+
     public void OnPathFound(Vector3[] waypoints, bool pathSuccessfull)
     {
         if (pathSuccessfull && waypoints.Length != 0)
         {
             _path = new Path(waypoints, transform.position, TurnDist, StoppingDistance);
-            StopCoroutine("FollowPath");
-            StartCoroutine("FollowPath");
+            StopFollowingPath();
+            StartFollowingPath();
             //Debug.Log(gameObject.name + ": Path Found");
         }
         else
@@ -149,17 +161,51 @@ public class CharacterAI : MonoBehaviour
         }
     }
 
+    public void StopFollowingPath()
+    {
+        StopCoroutine("FollowPath");
+    }
+
+    public void StartFollowingPath()
+    {
+        StartCoroutine("FollowPath");
+    }
+
+    #endregion
+
+
+    private void CheckRange()
+    {
+        if (!Target)
+        {
+            Collider[] colliders = Physics.OverlapSphere(transform.position, _detectionRange, _targetLayer);
+            if (colliders.Length > 0)
+            {
+                Target = colliders[0].transform;
+            }
+        }
+        else
+        {
+            MathDistances();
+            if (_targetDistance > _detectionRange)
+            {
+                Target = null;
+            }
+        }
+    }
+
     public virtual void StateHandler()
     {
+        CheckRange();
+
         if (_stateManager && UseTarget && Target)
         {
-            float dist = Vector3.Distance(transform.position, Target.position);
-
-            if (dist <= _attackingRange)
+            if (_targetDistance <= _attackingRange)
             {
                 _attacking = true;
+                StopFollowingPath();
             }
-            else if (dist <= _detectionRange)
+            else if (_targetDistance <= _detectionRange)
             {
                 _detected = true;
                 _attacking = false;
@@ -263,16 +309,16 @@ public class CharacterAI : MonoBehaviour
     //    }
     //}
 
-    //private void MathDistances()
-    //{
-    //    Vector3 posYZero = transform.position;
-    //    posYZero.y = 0;
-    //    Vector3 destYZero = Destination;
-    //    destYZero.y = 0;
+    private void MathDistances()
+    {
+        Vector3 posYZero = transform.position;
+        posYZero.y = 0;
+        Vector3 destYZero = Target.position;
+        destYZero.y = 0;
 
-    //    _targetDistance = Vector3.Distance(transform.position, Destination);
-    //    _targetDistanceNoHeight = Vector3.Distance(posYZero, destYZero);
-    //}
+        _targetDistance = Vector3.Distance(transform.position, Target.position);
+        _targetDistanceNoHeight = Vector3.Distance(posYZero, destYZero);
+    }
 
     //private void GoToDestination()
     //{
@@ -327,6 +373,14 @@ public class CharacterAI : MonoBehaviour
             else Gizmos.color = transparentRed;
 
             Gizmos.DrawCube(transform.position + GroundCheckOffset, GroundedBoxSize);
+        }
+
+        if (ShowRange)
+        {
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawWireSphere(transform.position, _detectionRange);
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(transform.position, _attackingRange);
         }
 
         if (ShowPath)

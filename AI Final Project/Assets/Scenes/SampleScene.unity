@@ -1263,9 +1263,9 @@ GameObject:
   - component: {fileID: 990759899}
   - component: {fileID: 990759898}
   - component: {fileID: 990759897}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: GroundTarget
-  m_TagString: Untagged
+  m_TagString: Target
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1912,9 +1912,9 @@ GameObject:
   - component: {fileID: 1659372316}
   - component: {fileID: 1659372315}
   - component: {fileID: 1659372314}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AirTarget
-  m_TagString: Untagged
+  m_TagString: Target
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2433,11 +2433,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5662321767494245432, guid: 6ebcc5804fa7e5c40abbef73abc4c305,
-        type: 3}
-      propertyPath: Target
-      value: 
-      objectReference: {fileID: 990759896}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6ebcc5804fa7e5c40abbef73abc4c305, type: 3}
 --- !u!4 &8706838916231641085 stripped

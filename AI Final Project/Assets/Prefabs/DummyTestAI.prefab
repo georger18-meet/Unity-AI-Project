@@ -242,9 +242,13 @@ MonoBehaviour:
   UseTarget: 1
   Target: {fileID: 0}
   Destination: {x: 0, y: 0, z: 0}
-  StoppingDistance: 1
+  StoppingDistance: 2
   ShowGrounded: 1
+  ShowRange: 1
   ShowPath: 1
+  _targetLayer:
+    serializedVersion: 2
+    m_Bits: 256
   _detectionRange: 10
   _attackingRange: 2
   _rangedAttackRef: {fileID: 563486620439039788}
