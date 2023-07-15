@@ -5,9 +5,9 @@ using UnityEngine;
 
 public class StateManager : MonoBehaviour
 {
-    public AllStates DisplayState;
     [SerializeField] private StatesHolder _statesHolder;
     State _currentState;
+    private AllStates DisplayState;
 
     public StatesHolder GetStatesHolder { get => _statesHolder; }
 
@@ -15,7 +15,7 @@ public class StateManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _currentState = _statesHolder.GetStateInDict(AllStates.Idle);
+        _currentState = _statesHolder.GetStateInDict(_statesHolder.StateInstances[0].CurrentState);
         _currentState.EnterState(this);
     }
 

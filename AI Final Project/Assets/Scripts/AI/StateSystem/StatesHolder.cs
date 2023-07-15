@@ -9,6 +9,8 @@ public class StatesHolder : MonoBehaviour
 
     public Dictionary<Enum, State> StatesDict = new Dictionary<Enum, State>();
 
+    public List<StateInstance> StateInstances { get => _stateInstances; }
+
     public State GetStateInDict(AllStates stateEnum)
     {
         StatesDict.TryGetValue(stateEnum, out State state);
@@ -33,5 +35,6 @@ public class StatesHolder : MonoBehaviour
         StatesDict.Add(AllStates.Idle, new IdleState());
         StatesDict.Add(AllStates.Chase, new ChaseState());
         StatesDict.Add(AllStates.Attack, new AttackState());
+        StatesDict.Add(AllStates.Patrol, new PatrolState());
     }
 }

@@ -50,7 +50,7 @@ public class Destroyer : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Environment"))
+        if (other.CompareTag("Environment") || other.CompareTag("Target"))
         {
             DoDestroy();
         }

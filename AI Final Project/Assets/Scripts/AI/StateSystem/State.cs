@@ -19,5 +19,6 @@ public enum AllStates
 {
     Idle,
     Chase,
-    Attack
+    Attack,
+    Patrol
 }

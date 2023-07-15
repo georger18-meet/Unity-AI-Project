@@ -9,7 +9,6 @@ public class AttackState : State
     public override void EnterState(StateManager manager)
     {
         Debug.Log("Entered Attack State");
-        manager.DisplayState = AllStates.Attack;
     }
 
     public override void UpdateState(StateManager manager)
