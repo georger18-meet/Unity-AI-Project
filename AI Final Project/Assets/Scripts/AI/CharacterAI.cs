@@ -49,6 +49,7 @@ public class CharacterAI : MonoBehaviour
     bool _attacking;
     private StateManager _stateManager;
 
+    public bool Attacking { get => _attacking; set => _attacking = value; }
 
     private void Start()
     {
