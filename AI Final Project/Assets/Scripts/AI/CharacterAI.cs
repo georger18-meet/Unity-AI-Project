@@ -76,6 +76,7 @@ public class CharacterAI : MonoBehaviour
     public void Run()
     {
         if (UseTarget && Target != null) Destination = Target.position;
+        CheckRange();
         StateHandler();
     }
 
@@ -176,28 +177,29 @@ public class CharacterAI : MonoBehaviour
 
     private void CheckRange()
     {
-        if (!Target)
+        if (UseTarget)
         {
-            Collider[] colliders = Physics.OverlapSphere(transform.position, _detectionRange, _targetLayer);
-            if (colliders.Length > 0)
+            if (!Target)
             {
-                Target = colliders[0].transform;
+                Collider[] colliders = Physics.OverlapSphere(transform.position, _detectionRange, _targetLayer);
+                if (colliders.Length > 0)
+                {
+                    Target = colliders[0].transform;
+                }
             }
-        }
-        else
-        {
-            MathDistances();
-            if (_targetDistance > _detectionRange)
+            else
             {
-                Target = null;
+                MathDistances();
+                if (_targetDistance > _detectionRange)
+                {
+                    Target = null;
+                }
             }
         }
     }
 
     public virtual void StateHandler()
     {
-        CheckRange();
-
         if (_stateManager && UseTarget && Target)
         {
             if (_targetDistance <= _attackingRange)
