@@ -8,10 +8,11 @@ public class CharacterAI : MonoBehaviour
 {
     [Header("Movement")]
     public Vector3 Direction;
-    public float Speed = 5;
+    public float MaxSpeed = 5;
     public float TurnDist = 1;
     public float AngularSpeed = 3;
     private Vector3 _movingVelocity;
+    private float _currentSpeed;
     private bool _isMoving;
     private bool _canMove;
 
@@ -52,6 +53,7 @@ public class CharacterAI : MonoBehaviour
     private StateManager _stateManager;
 
 
+    public float CurrentSpeed { get => _currentSpeed; set => _currentSpeed = value; }
     public float TargetDistance { get => _targetDistance; }
     public float DetectionRange { get => _detectionRange; }
     public float AttackingRange { get => _attackingRange; }
@@ -59,9 +61,10 @@ public class CharacterAI : MonoBehaviour
     public bool Attacking { get => _attacking; set => _attacking = value; }
     public StateManager StateManagerRef { get => _stateManager; }
 
-
     private void Start()
     {
+        _currentSpeed = MaxSpeed;
+
         _stateManager = GetComponent<StateManager>();
 
         if (UseTarget && Target != null)
@@ -162,7 +165,7 @@ public class CharacterAI : MonoBehaviour
 
                 Quaternion targetRot = Quaternion.LookRotation(_path.LookPoints[pathIndex] - transform.position);
                 transform.rotation = Quaternion.Lerp(transform.rotation, targetRot, AngularSpeed * Time.deltaTime);
-                transform.Translate(Vector3.forward * Speed * speedPercent * Time.deltaTime, Space.Self);
+                transform.Translate(Vector3.forward * _currentSpeed * speedPercent * Time.deltaTime, Space.Self);
             }
 
             yield return null;
