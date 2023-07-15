@@ -19,5 +19,20 @@ public class AttackState : State
         {
             manager.SwitchState(manager.GetStatesHolder.GetStateInDict(PreviousState));
         }
+        CheckAttack(manager);
+    }
+
+
+    // Not From Base State Class
+    // ------------------------------
+    private CharacterAI _characterAIRef;
+    private AttackBase _attackBase;
+
+    private void CheckAttack(StateManager manager)
+    {
+        if (!_characterAIRef) _characterAIRef = manager.GetComponent<CharacterAI>();
+        if (!_attackBase) _attackBase = manager.GetComponent<AttackBase>();
+
+        _attackBase.AttackEnabled = _characterAIRef.Attacking;
     }
 }

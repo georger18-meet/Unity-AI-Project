@@ -51,7 +51,14 @@ public class CharacterAI : MonoBehaviour
     bool _attacking;
     private StateManager _stateManager;
 
+
+    public float TargetDistance { get => _targetDistance; }
+    public float DetectionRange { get => _detectionRange; }
+    public float AttackingRange { get => _attackingRange; }
+    public bool Detected { get => _detected; set => _detected = value; }
     public bool Attacking { get => _attacking; set => _attacking = value; }
+    public StateManager StateManagerRef { get => _stateManager; }
+
 
     private void Start()
     {
@@ -200,50 +207,7 @@ public class CharacterAI : MonoBehaviour
 
     public virtual void StateHandler()
     {
-        if (_stateManager && UseTarget && Target)
-        {
-            if (_targetDistance <= _attackingRange)
-            {
-                _attacking = true;
-                StopFollowingPath();
-            }
-            else if (_targetDistance <= _detectionRange)
-            {
-                _detected = true;
-                _attacking = false;
-            }
-            else
-            {
-                _detected = false;
-                _attacking = false;
-            }
-
-
-            if (_detected)
-            {
-                if (!_attacking)
-                {
-                    _stateManager.GetStatesHolder.GetStateInDict(AllStates.Idle).FirstCondition = true;
-                    _stateManager.GetStatesHolder.GetStateInDict(AllStates.Chase).FirstCondition = true;
-                    _stateManager.GetStatesHolder.GetStateInDict(AllStates.Chase).SecondCondition = false;
-                    _stateManager.GetStatesHolder.GetStateInDict(AllStates.Attack).FirstCondition = false;
-                }
-                else
-                {
-                    _stateManager.GetStatesHolder.GetStateInDict(AllStates.Idle).FirstCondition = true;
-                    _stateManager.GetStatesHolder.GetStateInDict(AllStates.Chase).FirstCondition = true;
-                    _stateManager.GetStatesHolder.GetStateInDict(AllStates.Chase).SecondCondition = true;
-                    _stateManager.GetStatesHolder.GetStateInDict(AllStates.Attack).FirstCondition = true;
-                }
-            }
-            else
-            {
-                _stateManager.GetStatesHolder.GetStateInDict(AllStates.Idle).FirstCondition = false;
-                _stateManager.GetStatesHolder.GetStateInDict(AllStates.Chase).FirstCondition = false;
-                _stateManager.GetStatesHolder.GetStateInDict(AllStates.Chase).SecondCondition = false;
-                _stateManager.GetStatesHolder.GetStateInDict(AllStates.Attack).FirstCondition = false;
-            }
-        }
+        // Override Within the Inherited Character Script
     }
 
     //// Update is called once per frame

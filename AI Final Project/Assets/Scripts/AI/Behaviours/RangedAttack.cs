@@ -2,20 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RangedAttack : MonoBehaviour
+public class RangedAttack : AttackBase
 {
     [SerializeField] private GameObject _projectile;
     [SerializeField] private Transform _firePoint;
     [SerializeField] private float _fireForce;
     [SerializeField] private float _fireRate;
     private float _fireTimer;
-    public bool FireEnabled = false;
 
 
     // Update is called once per frame
     void Update()
     {
-        if (FireEnabled)
+        if (AttackEnabled)
         {
             if (_fireTimer >= _fireRate)
             {
