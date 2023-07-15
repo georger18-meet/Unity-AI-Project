@@ -409,7 +409,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Direction: {x: 0, y: 0, z: 1}
-  Speed: 5
+  MaxSpeed: 5
   TurnDist: 1
   AngularSpeed: 3
   UseGravity: 0
@@ -431,8 +431,8 @@ MonoBehaviour:
   _targetLayer:
     serializedVersion: 2
     m_Bits: 256
-  _detectionRange: 10
-  _attackingRange: 2
+  _detectionRange: 20
+  _attackingRange: 7
 --- !u!114 &4369858953609293832
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -463,7 +463,9 @@ MonoBehaviour:
     type: 3}
   _firePoint: {fileID: 4369858954018297706}
   _fireForce: 20
-  _fireRate: 1
+  _fireRate: 0.5
+  _accuracy: 25
+  _maxAccuracyOffset: 20
 --- !u!1 &4369858953672032569
 GameObject:
   m_ObjectHideFlags: 0

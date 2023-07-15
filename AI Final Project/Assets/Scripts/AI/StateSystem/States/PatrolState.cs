@@ -41,7 +41,7 @@ public class PatrolState : State
     private CharacterAI _characterAIRef;
     private Transform _characterTransform;
     public float PatrolRange = 10;
-    public float MaxWaitTime = 5;
+    public float MaxWaitTime = 3;
     private float _waitTime;
     private float _waitingTimer;
     private Vector3 _startingPoint;

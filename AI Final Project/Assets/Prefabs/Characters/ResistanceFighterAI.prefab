@@ -82,7 +82,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Direction: {x: 0, y: 0, z: 1}
-  Speed: 5
+  MaxSpeed: 5
   TurnDist: 1
   AngularSpeed: 3
   UseGravity: 0
@@ -137,6 +137,8 @@ MonoBehaviour:
   _firePoint: {fileID: 4395703859632722178}
   _fireForce: 20
   _fireRate: 1
+  _accuracy: 90
+  _maxAccuracyOffset: 10
 --- !u!1 &70567699328178773
 GameObject:
   m_ObjectHideFlags: 0
