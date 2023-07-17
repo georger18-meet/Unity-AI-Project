@@ -195,6 +195,7 @@ public class CharacterAI : MonoBehaviour
         {
             if (!Target)
             {
+                Target = null;
                 Collider[] targets = Physics.OverlapSphere(transform.position, _detectionRange, _targetLayer);
                 if (targets.Length > 0)
                 {

@@ -373,6 +373,7 @@ GameObject:
   - component: {fileID: 4369858953609293839}
   - component: {fileID: 4369858953609293832}
   - component: {fileID: 4369858953609293835}
+  - component: {fileID: 8997712811567121126}
   m_Layer: 8
   m_Name: CloneTrooperAI
   m_TagString: Untagged
@@ -405,7 +406,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4369858953609293834}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.5
   m_Height: 2
@@ -476,13 +477,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AttackEnabled: 0
-  _projectile: {fileID: 8768831054892389209, guid: 141aff34563283e4eb6ea38c91fc032b,
+  _projectile: {fileID: 8768831054892389209, guid: 87c501a09cf276f44a1df633ba4f0520,
     type: 3}
   _firePoint: {fileID: 4369858954018297706}
   _fireForce: 20
   _fireRate: 0.5
   _accuracy: 25
   _maxAccuracyOffset: 20
+--- !u!114 &8997712811567121126
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4369858953609293834}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3336c5e48b601fc43a0fc88379341036, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxHP: 10
+  _currentHP: 0
+  _invulnerable: 0
 --- !u!1 &4369858953672032569
 GameObject:
   m_ObjectHideFlags: 0

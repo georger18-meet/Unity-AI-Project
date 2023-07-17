@@ -127,9 +127,10 @@ GameObject:
   - component: {fileID: 5321153113433626217}
   - component: {fileID: 4757547531248542044}
   - component: {fileID: 7460961034234377601}
+  - component: {fileID: 2989697222520728229}
   m_Layer: 0
-  m_Name: Projectile
-  m_TagString: Untagged
+  m_Name: AwayProjectile
+  m_TagString: Damager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -193,3 +194,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UseDestroy: 1
   DoTime: 2
+--- !u!114 &2989697222520728229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8768831054892389209}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a6b4e07fd0814b44867083faac98fc6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _canAffect: 0
+  _damageAmount: 1
+  CanDamage: 1
