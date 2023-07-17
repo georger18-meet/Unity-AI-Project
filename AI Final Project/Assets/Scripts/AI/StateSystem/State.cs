@@ -21,5 +21,6 @@ public enum AllStates
     Chase,
     Attack,
     Patrol,
-    AOE
+    AOE,
+    Heal
 }

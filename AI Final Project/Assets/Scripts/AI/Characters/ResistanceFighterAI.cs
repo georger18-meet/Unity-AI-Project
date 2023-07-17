@@ -34,6 +34,8 @@ public class ResistanceFighterAI : CharacterAI
             {
                 if (!Attacking)
                 {
+                    StateManagerRef.GetStatesHolder.GetStateInDict(AllStates.Idle).SecondCondition = false;
+                    StateManagerRef.GetStatesHolder.GetStateInDict(AllStates.Heal).SecondCondition = true;
                     StateManagerRef.GetStatesHolder.GetStateInDict(AllStates.Idle).FirstCondition = true;
                     StateManagerRef.GetStatesHolder.GetStateInDict(AllStates.Chase).FirstCondition = true;
                     StateManagerRef.GetStatesHolder.GetStateInDict(AllStates.Chase).SecondCondition = false;
@@ -41,6 +43,8 @@ public class ResistanceFighterAI : CharacterAI
                 }
                 else
                 {
+                    StateManagerRef.GetStatesHolder.GetStateInDict(AllStates.Idle).SecondCondition = false;
+                    StateManagerRef.GetStatesHolder.GetStateInDict(AllStates.Heal).SecondCondition = true;
                     StateManagerRef.GetStatesHolder.GetStateInDict(AllStates.Idle).FirstCondition = true;
                     StateManagerRef.GetStatesHolder.GetStateInDict(AllStates.Chase).FirstCondition = true;
                     StateManagerRef.GetStatesHolder.GetStateInDict(AllStates.Chase).SecondCondition = true;
@@ -49,6 +53,8 @@ public class ResistanceFighterAI : CharacterAI
             }
             else
             {
+                StateManagerRef.GetStatesHolder.GetStateInDict(AllStates.Idle).SecondCondition = false;
+                StateManagerRef.GetStatesHolder.GetStateInDict(AllStates.Heal).SecondCondition = true;
                 StateManagerRef.GetStatesHolder.GetStateInDict(AllStates.Idle).FirstCondition = false;
                 StateManagerRef.GetStatesHolder.GetStateInDict(AllStates.Chase).FirstCondition = false;
                 StateManagerRef.GetStatesHolder.GetStateInDict(AllStates.Chase).SecondCondition = false;
@@ -64,6 +70,8 @@ public class ResistanceFighterAI : CharacterAI
             StateManagerRef.GetStatesHolder.GetStateInDict(AllStates.Chase).FirstCondition = false;
             StateManagerRef.GetStatesHolder.GetStateInDict(AllStates.Chase).SecondCondition = false;
             StateManagerRef.GetStatesHolder.GetStateInDict(AllStates.Attack).FirstCondition = false;
+            StateManagerRef.GetStatesHolder.GetStateInDict(AllStates.Idle).SecondCondition = true;
+            StateManagerRef.GetStatesHolder.GetStateInDict(AllStates.Heal).SecondCondition = false;
         }
     }
 }
