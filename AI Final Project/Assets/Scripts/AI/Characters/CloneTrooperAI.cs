@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class CloneTrooperAI : CharacterAI
 {
-    private float _switchAttackModeTime = 5;
+    [SerializeField] private float _switchAttackModeMaxTime = 5;
+    private float _switchTime;
     private float _timer;
     public bool _attackSwitched;
 
@@ -70,13 +71,17 @@ public class CloneTrooperAI : CharacterAI
 
     private void AttackSwitchHandle()
     {
-        if (_timer >= _switchAttackModeTime)
+        if (_timer > _switchTime)
         {
             _timer = 0;
             _attackSwitched = !_attackSwitched;
         }
         else
         {
+            if (_timer == 0)
+            {
+                _switchTime = Random.Range(0, _switchAttackModeMaxTime);
+            }
             _timer += Time.deltaTime;
         }
 
