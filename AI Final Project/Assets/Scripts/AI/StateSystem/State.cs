@@ -20,5 +20,6 @@ public enum AllStates
     Idle,
     Chase,
     Attack,
-    Patrol
+    Patrol,
+    AOE
 }

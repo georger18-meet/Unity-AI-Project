@@ -2,27 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AttackState : State
+public class AOEState : State
 {
-    public override AllStates ThisState { get => AllStates.Attack; }
+    public override AllStates ThisState { get => AllStates.AOE; }
 
     public override void EnterState(StateManager manager)
     {
-        Debug.Log("Entered Attack State");
+        Debug.Log("Entered AOE State");
     }
 
     public override void UpdateState(StateManager manager)
     {
-        Debug.Log("Updating Attack State");
+        Debug.Log("Updating AOE State");
+        CheckAttack(manager);
         if (!FirstCondition)
         {
             manager.SwitchState(manager.GetStatesHolder.GetStateInDict(PreviousState));
+            _attackBase.AttackEnabled = false;
         }
-        CheckAttack(manager);
         if (SecondCondition)
         {
             manager.SwitchState(manager.GetStatesHolder.GetStateInDict(NextState));
-            _attackBase.AttackEnabled = false;
         }
     }
 
@@ -35,7 +35,7 @@ public class AttackState : State
     private void CheckAttack(StateManager manager)
     {
         if (!_characterAIRef) _characterAIRef = manager.GetComponent<CharacterAI>();
-        if (!_attackBase) _attackBase = manager.GetComponent<AttackBase>();
+        if (!_attackBase) _attackBase = manager.transform.GetChild(0).GetComponent<AttackBase>();
 
         _attackBase.AttackEnabled = _characterAIRef.Attacking;
     }

@@ -36,5 +36,6 @@ public class StatesHolder : MonoBehaviour
         StatesDict.Add(AllStates.Chase, new ChaseState());
         StatesDict.Add(AllStates.Attack, new AttackState());
         StatesDict.Add(AllStates.Patrol, new PatrolState());
+        StatesDict.Add(AllStates.AOE, new AOEState());
     }
 }

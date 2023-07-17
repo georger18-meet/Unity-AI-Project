@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class CloneTrooperAI : CharacterAI
 {
+    private float _switchAttackModeTime = 5;
+    private float _timer;
+    public bool _attackSwitched;
+
     private void Update()
     {
         Run();
@@ -41,10 +45,7 @@ public class CloneTrooperAI : CharacterAI
                 }
                 else
                 {
-                    StateManagerRef.GetStatesHolder.GetStateInDict(AllStates.Patrol).FirstCondition = true;
-                    StateManagerRef.GetStatesHolder.GetStateInDict(AllStates.Chase).FirstCondition = true;
-                    StateManagerRef.GetStatesHolder.GetStateInDict(AllStates.Chase).SecondCondition = true;
-                    StateManagerRef.GetStatesHolder.GetStateInDict(AllStates.Attack).FirstCondition = true;
+                    AttackSwitchHandle();
                 }
             }
             else
@@ -64,6 +65,39 @@ public class CloneTrooperAI : CharacterAI
             StateManagerRef.GetStatesHolder.GetStateInDict(AllStates.Chase).FirstCondition = false;
             StateManagerRef.GetStatesHolder.GetStateInDict(AllStates.Chase).SecondCondition = false;
             StateManagerRef.GetStatesHolder.GetStateInDict(AllStates.Attack).FirstCondition = false;
+        }
+    }
+
+    private void AttackSwitchHandle()
+    {
+        if (_timer >= _switchAttackModeTime)
+        {
+            _timer = 0;
+            _attackSwitched = !_attackSwitched;
+        }
+        else
+        {
+            _timer += Time.deltaTime;
+        }
+
+
+        if (!_attackSwitched)
+        {
+            StateManagerRef.GetStatesHolder.GetStateInDict(AllStates.Patrol).FirstCondition = true;
+            StateManagerRef.GetStatesHolder.GetStateInDict(AllStates.Chase).FirstCondition = true;
+            StateManagerRef.GetStatesHolder.GetStateInDict(AllStates.Chase).SecondCondition = true;
+            StateManagerRef.GetStatesHolder.GetStateInDict(AllStates.Attack).FirstCondition = true;
+            StateManagerRef.GetStatesHolder.GetStateInDict(AllStates.Attack).SecondCondition = false;
+            StateManagerRef.GetStatesHolder.GetStateInDict(AllStates.AOE).FirstCondition = false;
+        }
+        else
+        {
+            StateManagerRef.GetStatesHolder.GetStateInDict(AllStates.Patrol).FirstCondition = true;
+            StateManagerRef.GetStatesHolder.GetStateInDict(AllStates.Chase).FirstCondition = true;
+            StateManagerRef.GetStatesHolder.GetStateInDict(AllStates.Chase).SecondCondition = true;
+            StateManagerRef.GetStatesHolder.GetStateInDict(AllStates.Attack).FirstCondition = true;
+            StateManagerRef.GetStatesHolder.GetStateInDict(AllStates.Attack).SecondCondition = true;
+            StateManagerRef.GetStatesHolder.GetStateInDict(AllStates.AOE).FirstCondition = true;
         }
     }
 }
