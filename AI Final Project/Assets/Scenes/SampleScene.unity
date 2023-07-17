@@ -2354,6 +2354,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: JediAI
       objectReference: {fileID: 0}
+    - target: {fileID: 1901372859717948531, guid: 517385b7587c93643909029b91024bd9,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 517385b7587c93643909029b91024bd9, type: 3}
 --- !u!1001 &4369858952897658978
