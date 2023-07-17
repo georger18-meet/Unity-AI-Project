@@ -1269,7 +1269,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &990759896
 Transform:
   m_ObjectHideFlags: 0
@@ -2460,7 +2460,7 @@ PrefabInstance:
     - target: {fileID: 70567698392988974, guid: 0bddc35aaeabad5439c1bc7cc886dc6f,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -19.66
+      value: -2.1
       objectReference: {fileID: 0}
     - target: {fileID: 70567698392988974, guid: 0bddc35aaeabad5439c1bc7cc886dc6f,
         type: 3}
@@ -2501,11 +2501,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: ResistanceFighterAI
-      objectReference: {fileID: 0}
-    - target: {fileID: 70567698392988975, guid: 0bddc35aaeabad5439c1bc7cc886dc6f,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0bddc35aaeabad5439c1bc7cc886dc6f, type: 3}

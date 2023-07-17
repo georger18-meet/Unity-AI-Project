@@ -52,6 +52,10 @@ public class CharacterAI : MonoBehaviour
     bool _attacking;
     private StateManager _stateManager;
 
+    [Header("Opponent Related")]
+    public bool Targeted;
+    public bool HomeTeam;
+
 
     public float CurrentSpeed { get => _currentSpeed; set => _currentSpeed = value; }
     public float TargetDistance { get => _targetDistance; }
@@ -191,10 +195,20 @@ public class CharacterAI : MonoBehaviour
         {
             if (!Target)
             {
-                Collider[] colliders = Physics.OverlapSphere(transform.position, _detectionRange, _targetLayer);
-                if (colliders.Length > 0)
+                Collider[] targets = Physics.OverlapSphere(transform.position, _detectionRange, _targetLayer);
+                if (targets.Length > 0)
                 {
-                    Target = colliders[0].transform;
+                    for (int i = 0; i < targets.Length; i++)
+                    {
+                        if (targets[i].TryGetComponent(out CharacterAI targetAI))
+                        {
+                            if (targetAI.HomeTeam != HomeTeam && !targetAI.Targeted)
+                            {
+                                Target = targets[i].transform;
+                                targetAI.Targeted = true;
+                            }
+                        }
+                    }
                 }
             }
             else
@@ -202,6 +216,10 @@ public class CharacterAI : MonoBehaviour
                 MathDistances();
                 if (_targetDistance > _detectionRange)
                 {
+                    if (Target.TryGetComponent(out CharacterAI targetAI))
+                    {
+                        targetAI.Targeted = false;
+                    }
                     Target = null;
                 }
             }
