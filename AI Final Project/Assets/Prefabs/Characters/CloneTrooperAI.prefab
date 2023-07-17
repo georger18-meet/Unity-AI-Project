@@ -496,9 +496,9 @@ MonoBehaviour:
   Target: {fileID: 0}
   Destination: {x: 0, y: 0, z: 0}
   StoppingDistance: 2
-  ShowGrounded: 1
-  ShowRange: 1
-  ShowPath: 1
+  ShowGrounded: 0
+  ShowRange: 0
+  ShowPath: 0
   _targetLayer:
     serializedVersion: 2
     m_Bits: 256
@@ -506,6 +506,7 @@ MonoBehaviour:
   _attackingRange: 7
   Targeted: 0
   HomeTeam: 0
+  _switchAttackModeMaxTime: 5
   _attackSwitched: 0
 --- !u!114 &4369858953609293832
 MonoBehaviour:
@@ -552,7 +553,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3336c5e48b601fc43a0fc88379341036, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHP: 10
+  _maxHP: 20
   _currentHP: 0
   _invulnerable: 0
 --- !u!1 &4369858953672032569

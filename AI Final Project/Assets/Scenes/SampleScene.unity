@@ -2571,11 +2571,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: ResistanceFighterAI
       objectReference: {fileID: 0}
-    - target: {fileID: 70567698392988975, guid: 0bddc35aaeabad5439c1bc7cc886dc6f,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0bddc35aaeabad5439c1bc7cc886dc6f, type: 3}
 --- !u!4 &8706838916231641085 stripped

@@ -114,9 +114,9 @@ MonoBehaviour:
   Target: {fileID: 0}
   Destination: {x: 0, y: 0, z: 0}
   StoppingDistance: 2
-  ShowGrounded: 1
-  ShowRange: 1
-  ShowPath: 1
+  ShowGrounded: 0
+  ShowRange: 0
+  ShowPath: 0
   _targetLayer:
     serializedVersion: 2
     m_Bits: 256
@@ -170,7 +170,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3336c5e48b601fc43a0fc88379341036, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHP: 15
+  _maxHP: 30
   _currentHP: 0
   _invulnerable: 0
 --- !u!1 &70567699328178773

@@ -23,5 +23,6 @@ public enum AllStates
     Patrol,
     AOE,
     Heal,
-    Dodge
+    Dodge,
+    Shield
 }
