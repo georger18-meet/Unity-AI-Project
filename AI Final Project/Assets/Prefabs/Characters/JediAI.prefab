@@ -407,7 +407,7 @@ MonoBehaviour:
   _targetLayer:
     serializedVersion: 2
     m_Bits: 256
-  _detectionRange: 20
+  _detectionRange: 15
   _attackingRange: 2
   Targeted: 0
   HomeTeam: 1
