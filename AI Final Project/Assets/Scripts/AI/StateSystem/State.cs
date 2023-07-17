@@ -22,5 +22,6 @@ public enum AllStates
     Attack,
     Patrol,
     AOE,
-    Heal
+    Heal,
+    Dodge
 }

@@ -124,6 +124,7 @@ MonoBehaviour:
   _attackingRange: 7
   Targeted: 0
   HomeTeam: 1
+  _toDodgeMaxTime: 10
 --- !u!114 &4936884058631882623
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -339,6 +340,53 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &494626939309589925
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2241312367665706223}
+  - component: {fileID: 6733567209072859029}
+  m_Layer: 0
+  m_Name: DodgeState
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2241312367665706223
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 494626939309589925}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4928124215851998661}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6733567209072859029
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 494626939309589925}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a96b75be93695447b8cd8a21ccb1b72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CurrentState: 6
+  PreviousState: 2
+  NextState: 6
 --- !u!1 &1051901866205930047
 GameObject:
   m_ObjectHideFlags: 0
@@ -372,6 +420,7 @@ Transform:
   - {fileID: 6107476156484478183}
   - {fileID: 6509999458084720985}
   - {fileID: 8131053424917000663}
+  - {fileID: 2241312367665706223}
   m_Father: {fileID: 70567698392988974}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -392,6 +441,7 @@ MonoBehaviour:
   - {fileID: 2842780013191782441}
   - {fileID: 8012225475021156302}
   - {fileID: 7479406205651946825}
+  - {fileID: 6733567209072859029}
 --- !u!1 &2132446835777813696
 GameObject:
   m_ObjectHideFlags: 0
@@ -661,7 +711,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CurrentState: 2
   PreviousState: 1
-  NextState: 2
+  NextState: 6
 --- !u!1 &9071206120914652229
 GameObject:
   m_ObjectHideFlags: 0
