@@ -409,6 +409,7 @@ MonoBehaviour:
     m_Bits: 256
   _detectionRange: 15
   _attackingRange: 2
+  _charCollider: {fileID: 8639725002049455953}
   Targeted: 0
   HomeTeam: 1
   ShieldObj: {fileID: 6941938889954602093}

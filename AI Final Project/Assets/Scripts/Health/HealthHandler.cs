@@ -35,7 +35,6 @@ public class HealthHandler : MonoBehaviour
     private void _healthSystem_OnDeath(object sender, System.EventArgs e)
     {
         if (OnDeathOccured != null) OnDeathOccured(this, EventArgs.Empty);
-        Destroy(gameObject);
     }
 
     // Update is called once per frame

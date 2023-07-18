@@ -6,6 +6,8 @@ using UnityEngine;
 [RequireComponent(typeof(StateManager))]
 public class CharacterAI : MonoBehaviour
 {
+    private HealthHandler _healthHandler;
+
     [Header("Movement")]
     public Vector3 Direction;
     public float MaxSpeed = 5;
@@ -53,7 +55,8 @@ public class CharacterAI : MonoBehaviour
     private StateManager _stateManager;
 
     [Header("Opponent Related")]
-    public bool Targeted;
+    [SerializeField] private Collider _charCollider;
+    //public bool Targeted;
     public bool HomeTeam;
 
 
@@ -67,6 +70,9 @@ public class CharacterAI : MonoBehaviour
 
     private void Start()
     {
+        _healthHandler = GetComponent<HealthHandler>();
+        _healthHandler.OnDeathOccured += _healthHandler_OnDeathOccured;
+
         _currentSpeed = MaxSpeed;
 
         _stateManager = GetComponent<StateManager>();
@@ -80,6 +86,15 @@ public class CharacterAI : MonoBehaviour
             Destination = transform.position;
         }
         StartCoroutine(UpdatePath());
+    }
+
+    private void _healthHandler_OnDeathOccured(object sender, System.EventArgs e)
+    {
+        //if (Target != null)
+        //{
+        //    Target.GetComponent<CharacterAI>().Targeted = false;
+        //}
+        Destroy(gameObject);
     }
 
     private void Update()
@@ -197,19 +212,26 @@ public class CharacterAI : MonoBehaviour
             {
                 Target = null;
                 Collider[] targets = Physics.OverlapSphere(transform.position, _detectionRange, _targetLayer);
+                List<CharacterAI> trueTargets = new List<CharacterAI>();
                 if (targets.Length > 0)
                 {
                     for (int i = 0; i < targets.Length; i++)
                     {
-                        if (targets[i].TryGetComponent(out CharacterAI targetAI))
+                        if (targets[i] != _charCollider)
                         {
-                            if (targetAI.HomeTeam != HomeTeam && !targetAI.Targeted)
+                            if (targets[i].TryGetComponent(out CharacterAI targetAI))
                             {
-                                Target = targets[i].transform;
-                                targetAI.Targeted = true;
+                                if (targetAI.HomeTeam != HomeTeam/* && !targetAI.Targeted*/)
+                                {
+                                    trueTargets.Add(targetAI);
+                                    //Target = targets[i].transform;
+                                    //targetAI.Targeted = true;
+                                }
                             }
                         }
                     }
+
+                    if(trueTargets.Count > 0) Target = trueTargets[Random.Range(0, trueTargets.Count)].transform;
                 }
             }
             else
@@ -217,10 +239,10 @@ public class CharacterAI : MonoBehaviour
                 MathDistances();
                 if (_targetDistance > _detectionRange)
                 {
-                    if (Target.TryGetComponent(out CharacterAI targetAI))
-                    {
-                        targetAI.Targeted = false;
-                    }
+                    //if (Target.TryGetComponent(out CharacterAI targetAI))
+                    //{
+                    //    targetAI.Targeted = false;
+                    //}
                     Target = null;
                 }
             }

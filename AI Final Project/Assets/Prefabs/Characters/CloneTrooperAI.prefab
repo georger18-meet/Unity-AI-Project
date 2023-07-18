@@ -504,6 +504,7 @@ MonoBehaviour:
     m_Bits: 256
   _detectionRange: 20
   _attackingRange: 7
+  _charCollider: {fileID: 7814630973408039970}
   Targeted: 0
   HomeTeam: 0
   _switchAttackModeMaxTime: 5

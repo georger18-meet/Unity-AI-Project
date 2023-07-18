@@ -122,6 +122,7 @@ MonoBehaviour:
     m_Bits: 256
   _detectionRange: 20
   _attackingRange: 7
+  _charCollider: {fileID: 7890241011763523085}
   Targeted: 0
   HomeTeam: 1
   _toDodgeMaxTime: 10
@@ -170,7 +171,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3336c5e48b601fc43a0fc88379341036, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHP: 20
+  _maxHP: 12
   _currentHP: 0
   _invulnerable: 0
 --- !u!1 &70567699328178773
