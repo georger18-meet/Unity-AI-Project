@@ -56,8 +56,7 @@ public class CharacterAI : MonoBehaviour
 
     [Header("Opponent Related")]
     [SerializeField] private Collider _charCollider;
-    //public bool Targeted;
-    public bool HomeTeam;
+    [SerializeField] private UserType _userType;
 
 
     public float CurrentSpeed { get => _currentSpeed; set => _currentSpeed = value; }
@@ -67,6 +66,8 @@ public class CharacterAI : MonoBehaviour
     public bool Detected { get => _detected; set => _detected = value; }
     public bool Attacking { get => _attacking; set => _attacking = value; }
     public StateManager StateManagerRef { get => _stateManager; }
+    internal UserType GetUserType { get => _userType; }
+
 
     private void Start()
     {
@@ -90,10 +91,6 @@ public class CharacterAI : MonoBehaviour
 
     private void _healthHandler_OnDeathOccured(object sender, System.EventArgs e)
     {
-        //if (Target != null)
-        //{
-        //    Target.GetComponent<CharacterAI>().Targeted = false;
-        //}
         Destroy(gameObject);
     }
 
@@ -221,17 +218,15 @@ public class CharacterAI : MonoBehaviour
                         {
                             if (targets[i].TryGetComponent(out CharacterAI targetAI))
                             {
-                                if (targetAI.HomeTeam != HomeTeam/* && !targetAI.Targeted*/)
+                                if (targetAI.GetUserType != _userType)
                                 {
                                     trueTargets.Add(targetAI);
-                                    //Target = targets[i].transform;
-                                    //targetAI.Targeted = true;
                                 }
                             }
                         }
                     }
 
-                    if(trueTargets.Count > 0) Target = trueTargets[Random.Range(0, trueTargets.Count)].transform;
+                    if (trueTargets.Count > 0) Target = trueTargets[Random.Range(0, trueTargets.Count)].transform;
                 }
             }
             else

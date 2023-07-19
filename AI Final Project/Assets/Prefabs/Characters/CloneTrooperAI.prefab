@@ -505,8 +505,7 @@ MonoBehaviour:
   _detectionRange: 20
   _attackingRange: 7
   _charCollider: {fileID: 7814630973408039970}
-  Targeted: 0
-  HomeTeam: 0
+  _userType: 1
   _switchAttackModeMaxTime: 5
   _attackSwitched: 0
 --- !u!114 &4369858953609293832

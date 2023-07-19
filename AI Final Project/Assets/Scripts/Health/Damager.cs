@@ -4,11 +4,11 @@ using UnityEngine;
 
 
 // Who can get Damaged
-enum CanAffect
+enum UserType
 {
-    Home,
-    Away,
-    Both
+    Jedi,
+    Clone,
+    Resistance
 }
 
 
@@ -17,14 +17,14 @@ public class Damager : MonoBehaviour
     // Variables
     // --------------------
     [Header("Damage")]
-    [SerializeField] private CanAffect _canAffect;
+    [SerializeField] private UserType _userType;
     [SerializeField] private int _damageAmount;
     public bool CanDamage = false;
 
 
     // Properties
     // --------------------
-    internal CanAffect CanAffect { get { return _canAffect; } }
+    internal UserType GetUserType { get { return _userType; } }
 
     public int DamageAmount { get { return _damageAmount; } }
 

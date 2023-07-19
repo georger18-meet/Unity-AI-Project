@@ -56,7 +56,7 @@ public class HealthHandler : MonoBehaviour
         if (tempDamager.CanDamage)
         {
             // Check if GameObject can be Affected by Damager
-            if (_characterAI.HomeTeam && tempDamager.CanAffect == CanAffect.Home || !_characterAI.HomeTeam && tempDamager.CanAffect == CanAffect.Away || tempDamager.CanAffect == CanAffect.Both)
+            if (_characterAI.GetUserType != tempDamager.GetUserType)
             {
                 // If Damager is One Hit
                 _healthSystem.Damage(tempDamager.DamageAmount);

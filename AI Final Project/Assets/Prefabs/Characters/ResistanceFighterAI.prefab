@@ -123,8 +123,7 @@ MonoBehaviour:
   _detectionRange: 20
   _attackingRange: 7
   _charCollider: {fileID: 7890241011763523085}
-  Targeted: 0
-  HomeTeam: 1
+  _userType: 2
   _toDodgeMaxTime: 10
 --- !u!114 &4936884058631882623
 MonoBehaviour:
