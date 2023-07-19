@@ -14,11 +14,12 @@ public class AttackState : State
     public override void UpdateState(StateManager manager)
     {
         Debug.Log("Updating Attack State");
+        CheckAttack(manager);
         if (!FirstCondition)
         {
             manager.SwitchState(manager.GetStatesHolder.GetStateInDict(PreviousState));
+            _attackBase.AttackEnabled = false;
         }
-        CheckAttack(manager);
         if (SecondCondition)
         {
             manager.SwitchState(manager.GetStatesHolder.GetStateInDict(NextState));
